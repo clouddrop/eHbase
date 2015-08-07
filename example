@@ -1,0 +1,97 @@
+
+
+table user{
+personal,prof
+} VERSION =2
+
+
+
+
+put table -> user , row -> "1"  , columnfamily->  personal  , columnqualifier -> name , value -> "Ram"
+put table -> user , row -> "1"  , columnfamily->  personal  , columnqualifier -> age , value -> "25"
+
+
+put table -> user , row -> "1"  , columnfamily->  prof  , columnqualifier -> degree , value -> "BE"
+put table -> user , row -> "1"  , columnfamily->  prof  , columnqualifier -> other , value -> "NA"
+
+put table -> user , row -> "1"  , columnfamily->  others  , columnqualifier -> degree , value -> "BE"
+ERROR
+
+
+put table -> user , row -> "2"  , columnfamily->  personal  , columnqualifier -> name , value -> "Riya"
+put table -> user , row -> "2"  , columnfamily->  personal  , columnqualifier -> hobbies , value -> "singing"
+
+
+put table -> user , row -> "2"  , columnfamily->  prof  , columnqualifier -> degree , value -> "MBA"
+
+
+
+
+person:hobbie
+
+HFile 
+1 personal:name "Ram" 1
+1 personal:age  "25"  1
+1 prof:degree    "BE" 1
+
+put table -> user , row -> "1"  , columnfamily->  personal  , columnqualifier -> age , value -> "26"
+
+
+HFile 
+1 personal:name "Ram"  1
+1 personal:age  "26"  10
+1 personal:age  "25"   1
+1 prof:degree    "BE"  1
+
+
+put table -> user , row -> "1"  , columnfamily->  personal  , columnqualifier -> age , value -> "27"
+
+
+
+1 personal:name "Ram"  1
+1 personal:age  "27"  10
+1 personal:age  "26"   1
+1 prof:degree    "BE"  1
+
+
+
+get Table1 , row 25  
+
+
+goes to ZK
+
+ROOT
+where is ur META store RS1
+
+META
+Region 1 , server 1 , ( -infity , 50), table, so on
+Region 1 , server 1 , start key , end key , table, so on
+Region 1 , server 1 , start key , end key , table, so on
+Region 1 , server 1 , start key , end key , table, so on
+
+
+
+HBASE
+1 master 
+
+1 RS
+ 1 Region , TABLE 1 ,( -infity , 50)
+ 2 Region, TABLE 2 , (-inf , + infy)
+ 
+ 
+ 
+2 RS
+   Region , TABLE 1 , (51 , +infinity)
+
+3 RS
+
+
+
+4 RS
+
+
+
+
+
+
+

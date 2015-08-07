@@ -1,0 +1,22 @@
+create 't1', {NAME => 'f1'}, {NAME => 'f2'}, {NAME => 'f3'}
+
+put 't1', 'r1', 'f1:c1', 'value'
+
+put 't1', 'r1', 'f1:c1', 'value2'
+
+ 
+ get 't1' , 'r1' , {COLUMN => 'f1:c1' , VERSIONS => 1}
+ 
+  get 'tableName' , 'rowyKey(which the primary key)' , {COLUMN => 'f1(col family):c1(column name' , VERSIONS => 1}
+ 
+ flush 't1'
+ 
+ compact 't1'
+ 
+ 
+ create 'split_table', {NAME => 'colFam1', VERSIONS => 2}, {NAME => 'colFam2', VERSIONS => 2},{SPLITS => ['333','666','FOO']}
+  
+  
+    
+    create 't1', 'f1', {NUMREGIONS => 15, SPLITALGO => 'HexStringSplit'}
+    
